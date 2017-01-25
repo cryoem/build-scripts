@@ -403,10 +403,7 @@ class FixLinuxRpath(Builder):
         targets |= set(find_exec(root=self.args.cwd_rpath))
 
         for target in sorted(targets):
-            if target.startswith("/home/eman2/build/stage/eman2.daily/EMAN2/extlib/lib/python2.7"):
-                print(target)
-                continue
-	    if ".py" in target:
+            if ".py" in target or "extlib/lib/python2.7" in target:
                 continue
             xtarget = target.replace(self.args.cwd_rpath, '')
             depth = len(xtarget.split('/'))-2
@@ -493,8 +490,10 @@ class UnixPackage(Builder):
         mkdirs(os.path.join(self.args.cwd_images))
 
         print("Linking extlib/ to Python/ in cwd: {}".format(self.args.cwd_rpath))
-        cmd(['ln', '-s', 'extlib', 'Python'], cwd=self.args.cwd_rpath)
-        
+        if os.path.islink("Python"):
+            cmd(['ln', '-s', 'extlib', 'Python'], cwd=self.args.cwd_rpath)
+        else:
+            print("Already linked")
         log("... linking extlib/lib/python2.7/site-packages to extlib/site-packages")
         self.args.cwd_rpath_extlib = os.path.join(self.args.cwd_rpath,"extlib") # not sure why this is set incorrectly when entering this function
         cmd(['ln', '-s', 'lib/python2.7/site-packages', 'site-packages'],cwd=self.args.cwd_rpath_extlib)
@@ -570,7 +569,7 @@ if __name__ == "__main__":
     parser.add_argument('--target', help='platform',default=pform)
     parser.add_argument('--repository',   help='git repository name', default="eman2")
     parser.add_argument('--release',   help='Release', default='daily')
-    parser.add_argument('--threads',   help='Threads for eman2 build parallelism', default=8)
+    parser.add_argument('--threads',   help='Threads for eman2 build parallelism', default=4)
     parser.add_argument('--scpuser',   help='Upload: scp user', default='zope')
     parser.add_argument('--scphost',   help='Upload: scp host', default='ncmi.grid.bcm.edu')
     parser.add_argument('--scpdest',   help='Upload: scp destination directory', default='/home/zope-extdata/reposit/ncmi/software/counter_222/software_86')
