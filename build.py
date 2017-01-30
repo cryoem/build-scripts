@@ -414,6 +414,8 @@ class FixLinuxRpath(Builder):
             try:
                 # print ['patchelf', '--set-rpath', ":".join(origins), target]
                 cmd(['patchelf', '--set-rpath', ":".join(origins), target])
+                cmd(['readelf', '--print-rpath', target])
+                cmd(['objdump', '-x', target, '|', 'grep', 'RPATH'])
             except Exception, e:
                 print "Couldnt patchelf:", e        
         
