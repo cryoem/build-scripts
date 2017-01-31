@@ -7,3 +7,5 @@ channels:
 
 specs:
   - eman2 2.2
+  - conda
+  - pip
