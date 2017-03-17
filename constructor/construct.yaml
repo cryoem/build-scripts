@@ -4,7 +4,7 @@ version: 2.2
 channels:
     - http://repo.continuum.io/pkgs/free/
     - https://conda.anaconda.org/conda-forge/
-    - https://conda.anaconda.org/jmbell
+    - https://conda.anaconda.org/cryoem
 
 specs:
   - eman2 2.2
