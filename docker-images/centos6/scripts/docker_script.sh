@@ -7,6 +7,15 @@ CONSTRUCT_YAML_DIR="/workspace/build-scripts/constructor"
 set -x
 export PYTHONUNBUFFERED=1
 
+yum install -y \
+               gcc gcc-c++ \
+               mesa-libGLU-devel \
+               libXext-devel \
+               libXrender-devel \
+               libSM-devel \
+               libX11-devel && \
+yum clean all
+
 MINICONDA_FILE="Miniconda2-latest-Linux-x86_64.sh"
 
 curl -v -L -O https://repo.continuum.io/miniconda/$MINICONDA_FILE
