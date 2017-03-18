@@ -24,3 +24,10 @@ python setup.py install
 # Build eman recipe
 EMAN_REPO_DIR="/workspace/eman2"
 conda build ${EMAN_REPO_DIR}/recipes/eman -c cryoem -c defaults -c conda-forge
+
+# Package eman
+OUTPUT_DIR="/workspace/centos6"
+CONSTRUCT_YAML_DIR="/workspace/build-scripts/constructor"
+mkdir -p ${OUTPUT_DIR} && cd ${OUTPUT_DIR}
+sed "s~\(^.*file://\)\(.*$\)~\1${CONDA_PREFIX}/conda-bld/~" ${CONSTRUCT_YAML_DIR}/construct.yaml > construct.yaml
+constructor .
