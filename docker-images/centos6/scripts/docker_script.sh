@@ -11,3 +11,12 @@ bash $MINICONDA_FILE -b
 # Setup conda
 source ${HOME}/miniconda2/bin/activate root
 conda config --set show_channel_urls true
+
+conda install conda-build constructor --yes
+
+# Install constructor that is customized for eman
+curl -v -L https://github.com/cryoem/constructor/archive/eman.tar.gz -o constructor-eman.tar.gz
+tar xzvf constructor-eman.tar.gz
+
+cd constructor-eman/
+python setup.py install
