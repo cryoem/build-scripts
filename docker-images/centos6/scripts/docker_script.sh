@@ -20,3 +20,7 @@ tar xzvf constructor-eman.tar.gz
 
 cd constructor-eman/
 python setup.py install
+
+# Build eman recipe
+EMAN_REPO_DIR="/workspace/eman2"
+conda build ${EMAN_REPO_DIR}/recipes/eman -c cryoem -c defaults -c conda-forge
