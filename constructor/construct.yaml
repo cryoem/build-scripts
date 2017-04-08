@@ -9,4 +9,5 @@ channels:
 specs:
   - eman2 2.2
   - conda
+  - conda-build
   - pip
