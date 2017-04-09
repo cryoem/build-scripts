@@ -5,6 +5,7 @@ channels:
     - http://repo.continuum.io/pkgs/free/
     - https://conda.anaconda.org/conda-forge/
     - https://conda.anaconda.org/cryoem
+    - file:///place_holder_conda_prefix/conda-bld
 
 specs:
   - eman2 2.2
