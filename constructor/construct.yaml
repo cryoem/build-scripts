@@ -12,3 +12,5 @@ specs:
   - conda
   - conda-build
   - pip
+
+post_install: cluster_message.sh   # [unix]
