@@ -31,5 +31,6 @@ RUN curl -v -L -O https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x8
     python setup.py install
 
 ENV PATH /root/miniconda2/bin:$PATH
+ENV PYTHONUNBUFFERED 1
 
 CMD [ "/bin/bash" ]
