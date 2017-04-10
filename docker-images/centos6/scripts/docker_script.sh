@@ -8,4 +8,4 @@ set -x
 export PYTHONUNBUFFERED=1
 
 bash dockerfile.sh
-bash build_and_package.sh
+bash build_and_package.sh ${EMAN_REPO_DIR} ${OUTPUT_DIR} ${CONSTRUCT_YAML_DIR}
