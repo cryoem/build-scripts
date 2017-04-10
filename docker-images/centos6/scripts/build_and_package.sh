@@ -7,6 +7,8 @@ if [ $# -ne 3 ];then
     exit 1
 fi
 
+set -x
+
 EMAN_REPO_DIR=$1
 OUTPUT_DIR=$2
 CONSTRUCT_YAML_DIR=$3
