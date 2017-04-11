@@ -7,6 +7,8 @@ channels:
     - https://conda.anaconda.org/cryoem
     - file:///place_holder_conda_prefix/conda-bld
 
+keep_pkgs: True
+
 specs:
   - eman2 2.2
   - conda
