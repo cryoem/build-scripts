@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-bash yum.sh
-bash conda_environment.sh
+mydir=$(cd $(dirname $0); pwd -P)
+
+bash "${mydir}/yum.sh"
+bash "${mydir}/conda_environment.sh"
