@@ -28,6 +28,9 @@ docker_pkgs_dir=/root/miniconda2/pkgs
 
 docker info
 
+HOST_UID=$(id -u)
+HOST_GID=$(id -g)
+
 docker run -i \
             -v "$root_dir":"$docker_root_dir" \
             -v "$scripts_root_dir":"$docker_scripts_root_dir" \
@@ -46,5 +49,7 @@ bash "${docker_scripts_root_dir}"/scripts/build_and_package.sh \
                                 "$docker_root_dir"/eman2 \
                                 "$docker_root_dir"/centos6 \
                                 "${docker_scripts_root_dir}"/constructor
+
+chown -v $HOST_GID:$HOST_UID "$docker_root_dir"/centos6/*
 
 EOF
