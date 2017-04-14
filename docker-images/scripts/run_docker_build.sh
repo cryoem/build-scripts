@@ -43,6 +43,7 @@ docker run -i \
 
 set -ex
 export PYTHONUNBUFFERED=1
+source activate root
 
 bash "${docker_scripts_root_dir}"/scripts/build_and_package.sh \
                                 "$docker_root_dir"/eman2/recipes/eman \

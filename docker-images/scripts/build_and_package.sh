@@ -13,7 +13,6 @@ EMAN_RECIPE_DIR=$1
 OUTPUT_DIR=$2
 CONSTRUCT_YAML_DIR=$3
 
-source activate root
 
 # Build eman recipe
 conda build ${EMAN_RECIPE_DIR} -c cryoem -c defaults -c conda-forge
