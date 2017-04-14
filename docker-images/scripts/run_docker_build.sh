@@ -9,11 +9,17 @@ fi
 
 docker_image=$1
 root_dir=$(cd $2; pwd -P)
+scripts_root_dir=$(cd $(dirname $0)/..; pwd -P)
+
+docker_root_dir="/workspace"
+docker_scripts_root_dir="/scripts_root"
+
 
 docker info
 
 docker run -i \
-            -v "$root_dir":/workspace \
+            -v "$root_dir":"$docker_root_dir" \
+            -v "$scripts_root_dir":"$docker_scripts_root_dir" \
             -a stdin -a stdout -a stderr \
             $docker_image \
             bash << EOF
@@ -22,6 +28,9 @@ set -x
 export PYTHONUNBUFFERED=1
 
 bash dockerfile.sh
-bash build_and_package.sh /workspace/eman2 /workspace/centos6 /workspace/build-scripts/constructor
+bash "${docker_scripts_root_dir}"/scripts/build_and_package.sh \
+                                "$docker_root_dir"/eman2 \
+                                "$docker_root_dir"/centos6 \
+                                "${docker_scripts_root_dir}"/constructor
 
 EOF
