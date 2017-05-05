@@ -19,7 +19,8 @@ esac
 set -xe
 
 MYDIR=$(cd $(dirname $0) && pwd -P)
-EMAN_REICPE_DIR="${HOME}"/workspace/eman2-src/recipes/eman
+EMAN_REPO_DIR="${HOME}"/workspace/eman2-src
+EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME}"/workspace/eman-installers
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
@@ -29,6 +30,11 @@ UPLOAD_FILENAME="eman${version}.${os_label}.daily.${extension}"
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
 {
+# Checkout code
+cd "${EMAN_REPO_DIR}"
+git checkout master
+git pull --rebase
+
 # Conda-build eman
 source activate root
 
