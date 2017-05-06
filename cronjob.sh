@@ -7,6 +7,15 @@ if [ $# -ne 1 ];then
     exit 1
 fi
 
+version="2.2"
+
+case $1 in
+    'centos6') os_label="linux64.centos6"; extension="sh";  constructor_output_os_label="Linux" ;;
+    'centos7') os_label="linux64.centos7"; extension="sh";  constructor_output_os_label="Linux" ;;
+    'mac')     os_label="mac";             extension="sh";  constructor_output_os_label="MacOSX" ;;
+    'win')     os_label="win64";           extension="exe"; constructor_output_os_label="Windows" ;;
+esac
+
 set -xe
 
 MYDIR=$(cd $(dirname $0) && pwd -P)
