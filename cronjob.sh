@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ $# -ne 1 ];then
+    echo
+    echo -e '\033[35m'"  Usage: $(basename ${0}) [os-label (mac, centos6, centos7, win)]"'\033[0m'
+    echo
+    exit 1
+fi
+
 set -xe
 
 MYDIR=$(cd $(dirname $0) && pwd -P)
