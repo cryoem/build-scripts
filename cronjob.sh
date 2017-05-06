@@ -44,6 +44,13 @@ source activate root
 
 # Upload installer
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
-rsync -avzh --stats "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
+
+if [ "$1" != "win" ];then
+    cmd="rsync -avzh --stats"
+else
+    cmd="scp -v"
+fi
+
+$cmd "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
 
 } 2>&1 | tee "${HOME}"/workspace/logs/build_${timestamp}.log
