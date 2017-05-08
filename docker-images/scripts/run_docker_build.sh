@@ -12,11 +12,11 @@ root_dir=$(cd $2; pwd -P)
 
 docker info
 
-cat << EOF | docker run -i \
-                        -v "$root_dir":/workspace \
-                        -a stdin -a stdout -a stderr \
-                        $docker_image \
-                        bash
+docker run -i \
+            -v "$root_dir":/workspace \
+            -a stdin -a stdout -a stderr \
+            $docker_image \
+            bash << EOF
 
 set -x
 export PYTHONUNBUFFERED=1
