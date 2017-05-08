@@ -10,9 +10,9 @@ fi
 docker_image=$1
 root_dir=$(cd $2; pwd -P)
 
-sudo docker info
+docker info
 
-cat << EOF | sudo docker run -i \
+cat << EOF | docker run -i \
                         -v "$root_dir":/workspace \
                         -a stdin -a stdout -a stderr \
                         $docker_image \
