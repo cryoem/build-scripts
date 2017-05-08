@@ -41,7 +41,7 @@ docker run -i \
             $docker_image \
             bash << EOF
 
-set -x
+set -ex
 export PYTHONUNBUFFERED=1
 
 bash dockerfile.sh
