@@ -46,7 +46,7 @@ export PYTHONUNBUFFERED=1
 
 bash dockerfile.sh
 bash "${docker_scripts_root_dir}"/scripts/build_and_package.sh \
-                                "$docker_root_dir"/eman2 \
+                                "$docker_root_dir"/eman2/recipes/eman \
                                 "$docker_root_dir"/centos6 \
                                 "${docker_scripts_root_dir}"/constructor
 
