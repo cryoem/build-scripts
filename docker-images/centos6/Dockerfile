@@ -8,9 +8,9 @@ ENV LANG en_US.UTF-8
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 
 # Install basic requirements.
-RUN bash ../scripts/yum.sh
+RUN bash yum.sh
 
-RUN bash ../scripts/conda_environment.sh
+RUN bash ../scripts/conda_environment.sh centos6
 
 ENV PATH /root/miniconda2/bin:$PATH
 ENV PYTHONUNBUFFERED 1
