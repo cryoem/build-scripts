@@ -18,6 +18,10 @@ cat << EOF | sudo docker run -i \
                         $docker_image \
                         bash
 
-bash /workspace/eman2/docker/docker_script.sh
+set -x
+export PYTHONUNBUFFERED=1
+
+bash dockerfile.sh
+bash build_and_package.sh /workspace/eman2 /workspace/centos6 /workspace/build-scripts/constructor
 
 EOF
