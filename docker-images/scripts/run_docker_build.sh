@@ -22,10 +22,10 @@ fi
 
 docker_image=$1
 workspace_dir=$(cd $2; pwd -P)
-scripts_dir=$(cd $(dirname $0)/..; pwd -P)
+build_scripts_dir=$(cd $(dirname $0)/..; pwd -P)
 
 docker_workspace_dir="/workspace"
-docker_scripts_dir="/scripts_root"
+docker_build_scripts_dir="/scripts_root"
 
 dot_conda_dir=${workspace_dir}/docker_volumes/dot_conda
 docker_dot_conda_dir=/root/.conda/
@@ -49,7 +49,7 @@ HOST_GID=$(id -g)
 
 docker run -i \
             -v "$workspace_dir":"$docker_workspace_dir" \
-            -v "$scripts_dir":"$docker_scripts_dir" \
+            -v "$build_scripts_dir":"$docker_build_scripts_dir" \
             -v "$dot_conda_dir":"$docker_dot_conda_dir" \
             -v "$conda_bld_dir":"$docker_conda_bld_dir" \
             -v "$pkgs_dir":"$docker_pkgs_dir" \
@@ -61,10 +61,10 @@ set -ex
 export PYTHONUNBUFFERED=1
 source activate root
 
-bash "${docker_scripts_dir}"/scripts/build_and_package.sh \
+bash "${docker_build_scripts_dir}"/scripts/build_and_package.sh \
                                 "$docker_workspace_dir"/eman2/recipes/eman \
                                 "$docker_workspace_dir"/centos6 \
-                                "${docker_scripts_dir}"/constructor
+                                "${docker_build_scripts_dir}"/constructor
 
 chown -v $HOST_GID:$HOST_UID "$docker_workspace_dir"/centos6/*
 
