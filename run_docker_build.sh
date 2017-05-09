@@ -25,7 +25,7 @@ set -xe
 docker_image=$1
 eman_repo_dir=$(cd $2 && pwd -P)
 output_volumes_dir=$(cd $3 && pwd -P)
-build_scripts_dir=$(cd $(dirname $0)/../.. && pwd -P)
+build_scripts_dir=$(cd $(dirname $0) && pwd -P)
 
 docker_build_scripts_dir="/build_scripts"
 docker_home_dir="/root"
@@ -66,7 +66,7 @@ set -ex
 export PYTHONUNBUFFERED=1
 source activate root
 
-bash "${docker_build_scripts_dir}"/docker-images/scripts/build_and_package.sh \
+bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_eman_repo_dir}"/recipes/eman \
                                 "${docker_installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
