@@ -26,12 +26,13 @@ build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
 docker_workspace_dir="/workspace"
 docker_build_scripts_dir="/build_scripts"
+docker_home_dir="/root"
 
 dot_conda_dir=${workspace_dir}/docker_volumes/dot_conda
-docker_dot_conda_dir=/root/.conda/
+docker_dot_conda_dir=${docker_home_dir}/.conda/
 
 conda_root=${workspace_dir}/docker_volumes/conda_dir
-docker_conda_root="/root/miniconda2"
+docker_conda_root="${docker_home_dir}/miniconda2"
 
 conda_bld_dir=${conda_root}/conda-bld
 docker_conda_bld_dir=${docker_conda_root}/conda-bld
