@@ -33,8 +33,6 @@ dot_conda_dir=${cache_dir}/dot_conda
 conda_bld_dir=${cache_dir}/conda-bld
 pkgs_dir=${cache_dir}/pkgs
 
-conda_root=${workspace_dir}/docker_volumes/conda_dir
-
 
 docker_dot_conda_dir=${docker_home_dir}/.conda/
 docker_conda_bld_dir=${docker_conda_root}/conda-bld
