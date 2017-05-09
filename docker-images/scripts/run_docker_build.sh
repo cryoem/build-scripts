@@ -25,7 +25,7 @@ workspace_dir=$(cd $2; pwd -P)
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
 docker_workspace_dir="/workspace"
-docker_build_scripts_dir="/scripts_root"
+docker_build_scripts_dir="/build_scripts"
 
 dot_conda_dir=${workspace_dir}/docker_volumes/dot_conda
 docker_dot_conda_dir=/root/.conda/
