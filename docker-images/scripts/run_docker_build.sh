@@ -15,14 +15,14 @@
 
 if [ $# -ne 3 ];then
     echo
-    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [cache-dir] [eman-recipe-dir]"'\033[0m'
+    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [eman-recipe-dir] [cache-dir]"'\033[0m'
     echo
     exit 1
 fi
 
 docker_image=$1
-cache_dir=$2
-eman_recipe_dir=$3
+eman_recipe_dir=$(cd $2; pwd -P)
+cache_dir=$(cd $3; pwd -P)
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
 docker_build_scripts_dir="/build_scripts"
