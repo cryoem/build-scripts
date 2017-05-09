@@ -38,6 +38,8 @@ installers_dir="${cache_dir}/installers"
 docker_dot_conda_dir=${docker_home_dir}/.conda/
 docker_conda_bld_dir=${docker_conda_root}/conda-bld
 docker_pkgs_dir=${docker_conda_root}/pkgs
+docker_eman_recipe_dir="/eman_recipe_dir"
+docker_installers_dir="/installers_dir"
 
 
 
@@ -52,6 +54,8 @@ docker run -i \
             -v "$dot_conda_dir":"$docker_dot_conda_dir" \
             -v "$conda_bld_dir":"$docker_conda_bld_dir" \
             -v "$pkgs_dir":"$docker_pkgs_dir" \
+            -v "$eman_recipe_dir":"$docker_eman_recipe_dir" \
+            -v "$installers_dir":"$docker_installers_dir" \
             -a stdin -a stdout -a stderr \
             $docker_image \
             bash << EOF
@@ -61,8 +65,8 @@ export PYTHONUNBUFFERED=1
 source activate root
 
 bash "${docker_build_scripts_dir}"/docker-images/scripts/build_and_package.sh \
-                                "${eman_recipe_dir}" \
-                                "${installers_dir}" \
+                                "${docker_eman_recipe_dir}" \
+                                "${docker_installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
 
 chown -v $HOST_GID:$HOST_UID "${installers_dir}"/*
