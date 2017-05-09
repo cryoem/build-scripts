@@ -21,7 +21,6 @@ if [ $# -ne 2 ];then
 fi
 
 docker_image=$1
-workspace_dir=$(cd $2; pwd -P)
 cache_dir=$2
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
@@ -50,7 +49,6 @@ HOST_UID=$(id -u)
 HOST_GID=$(id -g)
 
 docker run -i \
-            -v "$workspace_dir":"$docker_workspace_dir" \
             -v "$build_scripts_dir":"$docker_build_scripts_dir" \
             -v "$dot_conda_dir":"$docker_dot_conda_dir" \
             -v "$conda_bld_dir":"$docker_conda_bld_dir" \
