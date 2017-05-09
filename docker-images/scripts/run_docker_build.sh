@@ -32,6 +32,7 @@ docker_conda_root="${docker_home_dir}/miniconda2"
 dot_conda_dir=${cache_dir}/dot_conda
 conda_bld_dir=${cache_dir}/conda-bld
 pkgs_dir=${cache_dir}/pkgs
+installers_dir="${cache_dir}/installers"
 
 
 docker_dot_conda_dir=${docker_home_dir}/.conda/
@@ -61,9 +62,9 @@ source activate root
 
 bash "${docker_build_scripts_dir}"/docker-images/scripts/build_and_package.sh \
                                 "$docker_workspace_dir"/eman2/recipes/eman \
-                                "$docker_workspace_dir"/centos6 \
+                                "${installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
 
-chown -v $HOST_GID:$HOST_UID "$docker_workspace_dir"/centos6/*
+chown -v $HOST_GID:$HOST_UID "${installers_dir}"/*
 
 EOF
