@@ -13,15 +13,16 @@
 # scripts_root_dir/                                       # scripts dir, = CWD/..
 #                 constructor/                            # construct.yaml dir
 
-if [ $# -ne 2 ];then
+if [ $# -ne 3 ];then
     echo
-    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [cache-dir]"'\033[0m'
+    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [cache-dir] [eman-recipe-dir]"'\033[0m'
     echo
     exit 1
 fi
 
 docker_image=$1
 cache_dir=$2
+eman_recipe_dir=$3
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
 docker_workspace_dir="/workspace"
@@ -61,7 +62,7 @@ export PYTHONUNBUFFERED=1
 source activate root
 
 bash "${docker_build_scripts_dir}"/docker-images/scripts/build_and_package.sh \
-                                "$docker_workspace_dir"/eman2/recipes/eman \
+                                "${eman_recipe_dir}" \
                                 "${installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
 
