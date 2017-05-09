@@ -23,9 +23,9 @@ fi
 set -xe
 
 docker_image=$1
-eman_repo_dir=$(cd $2; pwd -P)
-output_volumes_dir=$(cd $3; pwd -P)
-build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
+eman_repo_dir=$(cd $2 && pwd -P)
+output_volumes_dir=$(cd $3 && pwd -P)
+build_scripts_dir=$(cd $(dirname $0)/../.. && pwd -P)
 
 docker_build_scripts_dir="/build_scripts"
 docker_home_dir="/root"
