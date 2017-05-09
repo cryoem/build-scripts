@@ -15,24 +15,24 @@
 
 if [ $# -ne 3 ];then
     echo
-    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [eman-recipe-dir] [cache-dir]"'\033[0m'
+    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [eman-recipe-dir] [output-volumes-dir]"'\033[0m'
     echo
     exit 1
 fi
 
 docker_image=$1
 eman_recipe_dir=$(cd $2; pwd -P)
-cache_dir=$(cd $3; pwd -P)
+output_volumes_dir=$(cd $3; pwd -P)
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
 docker_build_scripts_dir="/build_scripts"
 docker_home_dir="/root"
 docker_conda_root="${docker_home_dir}/miniconda2"
 
-dot_conda_dir="${cache_dir}/dot_conda"
-conda_bld_dir="${cache_dir}/conda-bld"
-pkgs_dir="${cache_dir}/pkgs"
-installers_dir="${cache_dir}/installers"
+dot_conda_dir="${output_volumes_dir}/dot_conda"
+conda_bld_dir="${output_volumes_dir}/conda-bld"
+pkgs_dir="${output_volumes_dir}/pkgs"
+installers_dir="${output_volumes_dir}/installers"
 
 
 docker_dot_conda_dir="${docker_home_dir}/.conda/"
