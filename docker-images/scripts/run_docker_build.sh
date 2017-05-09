@@ -15,13 +15,13 @@
 
 if [ $# -ne 3 ];then
     echo
-    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [eman-recipe-dir] [output-volumes-dir]"'\033[0m'
+    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [eman-repo-dir] [output-volumes-dir]"'\033[0m'
     echo
     exit 1
 fi
 
 docker_image=$1
-eman_recipe_dir=$(cd $2; pwd -P)
+eman_repo_dir=$(cd $2; pwd -P)
 output_volumes_dir=$(cd $3; pwd -P)
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
@@ -38,7 +38,7 @@ installers_dir="${output_volumes_dir}/installers"
 docker_dot_conda_dir="${docker_home_dir}/.conda/"
 docker_conda_bld_dir="${docker_conda_root}/conda-bld"
 docker_pkgs_dir="${docker_conda_root}/pkgs"
-docker_eman_recipe_dir="/eman_recipe_dir"
+docker_eman_repo_dir="/eman_repo_dir"
 docker_installers_dir="/installers_dir"
 
 
@@ -54,7 +54,7 @@ docker run -i \
             -v "$dot_conda_dir":"$docker_dot_conda_dir" \
             -v "$conda_bld_dir":"$docker_conda_bld_dir" \
             -v "$pkgs_dir":"$docker_pkgs_dir" \
-            -v "$eman_recipe_dir":"$docker_eman_recipe_dir" \
+            -v "$eman_repo_dir":"$docker_eman_repo_dir" \
             -v "$installers_dir":"$docker_installers_dir" \
             -a stdin -a stdout -a stderr \
             $docker_image \
@@ -65,7 +65,7 @@ export PYTHONUNBUFFERED=1
 source activate root
 
 bash "${docker_build_scripts_dir}"/docker-images/scripts/build_and_package.sh \
-                                "${docker_eman_recipe_dir}" \
+                                "${docker_eman_repo_dir}"/recipes/eman \
                                 "${docker_installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
 
