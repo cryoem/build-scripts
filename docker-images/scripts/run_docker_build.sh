@@ -15,29 +15,30 @@
 
 if [ $# -ne 2 ];then
     echo
-    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [workspace-root-dir]"'\033[0m'
+    echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [cache-dir]"'\033[0m'
     echo
     exit 1
 fi
 
 docker_image=$1
 workspace_dir=$(cd $2; pwd -P)
+cache_dir=$2
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
 docker_workspace_dir="/workspace"
 docker_build_scripts_dir="/build_scripts"
 docker_home_dir="/root"
 
-dot_conda_dir=${workspace_dir}/docker_volumes/dot_conda
+dot_conda_dir=${cache_dir}/dot_conda
 docker_dot_conda_dir=${docker_home_dir}/.conda/
 
 conda_root=${workspace_dir}/docker_volumes/conda_dir
 docker_conda_root="${docker_home_dir}/miniconda2"
 
-conda_bld_dir=${conda_root}/conda-bld
+conda_bld_dir=${cache_dir}/conda-bld
 docker_conda_bld_dir=${docker_conda_root}/conda-bld
 
-pkgs_dir=${conda_root}/pkgs
+pkgs_dir=${cache_dir}/pkgs
 docker_pkgs_dir=${docker_conda_root}/pkgs
 
 
