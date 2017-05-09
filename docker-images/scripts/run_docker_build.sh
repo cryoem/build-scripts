@@ -29,15 +29,15 @@ docker_build_scripts_dir="/build_scripts"
 docker_home_dir="/root"
 docker_conda_root="${docker_home_dir}/miniconda2"
 
-dot_conda_dir=${cache_dir}/dot_conda
-conda_bld_dir=${cache_dir}/conda-bld
-pkgs_dir=${cache_dir}/pkgs
+dot_conda_dir="${cache_dir}/dot_conda"
+conda_bld_dir="${cache_dir}/conda-bld"
+pkgs_dir="${cache_dir}/pkgs"
 installers_dir="${cache_dir}/installers"
 
 
-docker_dot_conda_dir=${docker_home_dir}/.conda/
-docker_conda_bld_dir=${docker_conda_root}/conda-bld
-docker_pkgs_dir=${docker_conda_root}/pkgs
+docker_dot_conda_dir="${docker_home_dir}/.conda/"
+docker_conda_bld_dir="${docker_conda_root}/conda-bld"
+docker_pkgs_dir="${docker_conda_root}/pkgs"
 docker_eman_recipe_dir="/eman_recipe_dir"
 docker_installers_dir="/installers_dir"
 
