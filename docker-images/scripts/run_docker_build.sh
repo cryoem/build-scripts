@@ -25,7 +25,6 @@ cache_dir=$2
 eman_recipe_dir=$3
 build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
-docker_workspace_dir="/workspace"
 docker_build_scripts_dir="/build_scripts"
 docker_home_dir="/root"
 docker_conda_root="${docker_home_dir}/miniconda2"
