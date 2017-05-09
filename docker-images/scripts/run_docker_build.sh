@@ -20,6 +20,8 @@ if [ $# -ne 3 ];then
     exit 1
 fi
 
+set -xe
+
 docker_image=$1
 eman_repo_dir=$(cd $2; pwd -P)
 output_volumes_dir=$(cd $3; pwd -P)
