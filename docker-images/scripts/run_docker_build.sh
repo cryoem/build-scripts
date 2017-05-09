@@ -22,7 +22,7 @@ fi
 
 docker_image=$1
 workspace_dir=$(cd $2; pwd -P)
-build_scripts_dir=$(cd $(dirname $0)/..; pwd -P)
+build_scripts_dir=$(cd $(dirname $0)/../..; pwd -P)
 
 docker_workspace_dir="/workspace"
 docker_build_scripts_dir="/scripts_root"
@@ -61,7 +61,7 @@ set -ex
 export PYTHONUNBUFFERED=1
 source activate root
 
-bash "${docker_build_scripts_dir}"/scripts/build_and_package.sh \
+bash "${docker_build_scripts_dir}"/docker-images/scripts/build_and_package.sh \
                                 "$docker_workspace_dir"/eman2/recipes/eman \
                                 "$docker_workspace_dir"/centos6 \
                                 "${docker_build_scripts_dir}"/constructor
