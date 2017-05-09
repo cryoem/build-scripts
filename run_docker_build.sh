@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
 
-# If a single directory is given, the following structure is assumed:
-#
-# workspace-root-dir/
-#                     docker_volumes/dot_conda/           # .conda dir for constructor cache ???
-#                     docker_volumes/conda_dir/
-#                                             conda-bld/  # for caching
-#                                             pkgs/       # for caching
-#                     eman2/recipes/eman/                 # eman recipe dir
-#                     cenots6/                            # output dir for installer
-#
-# scripts_root_dir/                                       # scripts dir, = CWD/..
-#                 constructor/                            # construct.yaml dir
-
 if [ $# -ne 3 ];then
     echo
     echo -e '\033[35m'"  Usage: $(basename ${0}) [docker-image] [eman-repo-dir] [output-volumes-dir]"'\033[0m'
