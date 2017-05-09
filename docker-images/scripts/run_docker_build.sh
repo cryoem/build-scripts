@@ -21,22 +21,25 @@ if [ $# -ne 2 ];then
 fi
 
 docker_image=$1
-root_dir=$(cd $2; pwd -P)
-scripts_root_dir=$(cd $(dirname $0)/..; pwd -P)
+workspace_dir=$(cd $2; pwd -P)
+scripts_dir=$(cd $(dirname $0)/..; pwd -P)
 
-docker_root_dir="/workspace"
-docker_scripts_root_dir="/scripts_root"
+docker_workspace_dir="/workspace"
+docker_scripts_dir="/scripts_root"
 
-dot_conda_dir=${root_dir}/docker_volumes/dot_conda
+dot_conda_dir=${workspace_dir}/docker_volumes/dot_conda
 docker_dot_conda_dir=/root/.conda/
 
-conda_dir=${root_dir}/docker_volumes/conda_dir
+conda_root=${workspace_dir}/docker_volumes/conda_dir
+docker_conda_root="/root/miniconda2"
 
-conda_bld_dir=${conda_dir}/conda-bld
-docker_conda_bld_dir=/root/miniconda2/conda-bld
+conda_bld_dir=${conda_root}/conda-bld
+docker_conda_bld_dir=${docker_conda_root}/conda-bld
 
-pkgs_dir=${conda_dir}/pkgs
-docker_pkgs_dir=/root/miniconda2/pkgs
+pkgs_dir=${conda_root}/pkgs
+docker_pkgs_dir=${docker_conda_root}/pkgs
+
+
 
 
 docker info
@@ -45,8 +48,8 @@ HOST_UID=$(id -u)
 HOST_GID=$(id -g)
 
 docker run -i \
-            -v "$root_dir":"$docker_root_dir" \
-            -v "$scripts_root_dir":"$docker_scripts_root_dir" \
+            -v "$workspace_dir":"$docker_workspace_dir" \
+            -v "$scripts_dir":"$docker_scripts_dir" \
             -v "$dot_conda_dir":"$docker_dot_conda_dir" \
             -v "$conda_bld_dir":"$docker_conda_bld_dir" \
             -v "$pkgs_dir":"$docker_pkgs_dir" \
@@ -58,11 +61,11 @@ set -ex
 export PYTHONUNBUFFERED=1
 source activate root
 
-bash "${docker_scripts_root_dir}"/scripts/build_and_package.sh \
-                                "$docker_root_dir"/eman2/recipes/eman \
-                                "$docker_root_dir"/centos6 \
-                                "${docker_scripts_root_dir}"/constructor
+bash "${docker_scripts_dir}"/scripts/build_and_package.sh \
+                                "$docker_workspace_dir"/eman2/recipes/eman \
+                                "$docker_workspace_dir"/centos6 \
+                                "${docker_scripts_dir}"/constructor
 
-chown -v $HOST_GID:$HOST_UID "$docker_root_dir"/centos6/*
+chown -v $HOST_GID:$HOST_UID "$docker_workspace_dir"/centos6/*
 
 EOF
