@@ -38,7 +38,7 @@ git pull --rebase
 # Conda-build eman
 source activate root
 
-"${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
+bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
                                 "${INSTALLERS_DIR}" \
                                 "${CONSTRUCT_YAML_DIR}"
 
