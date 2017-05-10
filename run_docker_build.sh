@@ -50,8 +50,6 @@ docker run -i \
             bash << EOF
 
 set -ex
-export PYTHONUNBUFFERED=1
-source activate root
 
 bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_eman_repo_dir}"/recipes/eman \
