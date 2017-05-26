@@ -10,10 +10,10 @@ fi
 version="2.2"
 
 case $1 in
-    'centos6') os_label="linux64.centos6"; extension="sh";  constructor_output_os_label="Linux" ;;
-    'centos7') os_label="linux64.centos7"; extension="sh";  constructor_output_os_label="Linux" ;;
-    'mac')     os_label="mac";             extension="sh";  constructor_output_os_label="MacOSX" ;;
-    'win')     os_label="win64";           extension="exe"; constructor_output_os_label="Windows" ;;
+    'centos6') os_label="linux64"; distro_label=".centos6"; ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
+    'centos7') os_label="linux64"; distro_label=".centos7"; ctor_out_ext="sh";  upload_ext="daily.exe";  ;;
+    'mac')     os_label="mac";     distro_label="";         ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
+    'win')     os_label="win64";   distro_label="";         ctor_out_ext="exe"; upload_ext="daily1.exe"; ;;
 esac
 
 if [ $# -eq 2 ];then
@@ -30,8 +30,8 @@ EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME}"/workspace/eman-installers
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
-CONSTRUCTOR_OUTPUT_FILENAME="EMAN2-${version}-${constructor_output_os_label}-x86_64.${extension}"
-UPLOAD_FILENAME="eman${version}.${os_label}.daily.${extension}"
+CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
+UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${upload_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
