@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ $# -ne 1 ];then
+if [ $# -lt 1 ] || [ $# -gt 2 ];then
     echo
-    echo -e '\033[35m'"  Usage: $(basename ${0}) [os-label (mac, centos6, centos7, win)]"'\033[0m'
+    echo -e '\033[35m'"  Usage: $(basename ${0})    [os-label (mac, centos6, centos7, win)]    [branch (optional)]"'\033[0m'
     echo
     exit 1
 fi
@@ -15,6 +15,12 @@ case $1 in
     'mac')     os_label="mac";             extension="sh";  constructor_output_os_label="MacOSX" ;;
     'win')     os_label="win64";           extension="exe"; constructor_output_os_label="Windows" ;;
 esac
+
+if [ $# -eq 2 ];then
+    branch=$2
+else
+    branch="master"
+fi
 
 set -xe
 
@@ -32,7 +38,7 @@ timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 {
 # Checkout code
 cd "${EMAN_REPO_DIR}"
-git checkout master
+git checkout ${branch}
 git pull --rebase
 
 # Conda-build eman
