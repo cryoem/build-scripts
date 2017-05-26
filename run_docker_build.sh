@@ -23,6 +23,11 @@ conda_bld_dir="${output_volumes_dir}/conda-bld"
 pkgs_dir="${output_volumes_dir}/pkgs"
 installers_dir="${output_volumes_dir}"
 
+mkdir -p "${dot_conda_dir}"
+mkdir -p "${conda_bld_dir}"
+mkdir -p "${pkgs_dir}"
+mkdir -p "${installers_dir}"
+
 
 docker_dot_conda_dir="${docker_home_dir}/.conda/"
 docker_conda_bld_dir="${docker_conda_root}/conda-bld"
