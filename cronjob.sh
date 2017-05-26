@@ -39,8 +39,8 @@ git pull --rebase
 source activate root
 
 bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
-                                "${INSTALLERS_DIR}" \
-                                "${CONSTRUCT_YAML_DIR}"
+                                     "${INSTALLERS_DIR}" \
+                                     "${CONSTRUCT_YAML_DIR}"
 
 # Upload installer
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
