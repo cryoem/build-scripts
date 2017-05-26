@@ -5,6 +5,7 @@ channels:
     - http://repo.continuum.io/pkgs/free/
     - https://conda.anaconda.org/conda-forge/
     - https://conda.anaconda.org/cryoem
+    - http://repo.continuum.io/pkgs/msys2          # [win]
     - file:///place_holder_conda_prefix/conda-bld
 
 keep_pkgs: True
@@ -15,4 +16,6 @@ specs:
   - conda-build
   - pip
 
-post_install: cluster_message.sh   # [unix]
+welcome_image: images/EMAN2Icon.png    # [win]
+icon_image:    images/eman.ico         # [win]
+post_install:  cluster_message.sh      # [unix]
