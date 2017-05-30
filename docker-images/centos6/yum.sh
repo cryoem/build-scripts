@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 yum install -y \
-               gcc gcc-c++ \
+               gcc \
+               gcc-c++ \
                mesa-libGLU-devel \
                libXext-devel \
                libXrender-devel \
                libSM-devel \
-               libX11-devel && \
+               libX11-devel \
+               fontconfig && \
 yum clean all
