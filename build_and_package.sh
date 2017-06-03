@@ -16,8 +16,12 @@ CONSTRUCT_YAML_DIR=$3
 export PYTHONUNBUFFERED=1
 source activate root
 
+if [ "$(uname -s)" == "Linux" ];then
+    CONDA_BUILD_NUMPY_OPT="--numpy 1.8"
+fi
+
 # Build eman recipe
-conda build ${EMAN_RECIPE_DIR} -c cryoem -c defaults -c conda-forge
+conda build ${EMAN_RECIPE_DIR} -c cryoem -c defaults -c conda-forge ${CONDA_BUILD_NUMPY_OPT}
 
 # Package eman
 mkdir -p ${OUTPUT_DIR} && cd ${OUTPUT_DIR}
