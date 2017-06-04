@@ -45,8 +45,6 @@ if [ "$1" == "centos6" ];then
     bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
                                         "${EMAN_REPO_DIR}" \
                                         "${INSTALLERS_DIR}"
-
-    cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
 else
     # Conda-build eman
     source activate root
@@ -54,10 +52,9 @@ else
     bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
-
-    # Upload installer
-    cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
 fi
+
+cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
 
 if [ "$1" != "win" ];then
     cmd="rsync -avzh --stats"
