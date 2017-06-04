@@ -27,8 +27,7 @@ set -xe
 MYDIR=$(cd $(dirname $0) && pwd -P)
 EMAN_REPO_DIR="${HOME}"/workspace/eman2-src
 EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
-INSTALLERS_DIR="${HOME}"/workspace/eman-installers
-OUTPUT_DIR_CENTOS6="${HOME}"/workspace/centos6
+INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
@@ -45,9 +44,9 @@ git pull --rebase
 if [ "$1" == "centos6" ];then
     bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
                                         "${EMAN_REPO_DIR}" \
-                                        "${OUTPUT_DIR_CENTOS6}"
+                                        "${INSTALLERS_DIR}"
 
-    cp -av "${OUTPUT_DIR_CENTOS6}/installers/${CONSTRUCTOR_OUTPUT_FILENAME}" "${OUTPUT_DIR_CENTOS6}/installers/${UPLOAD_FILENAME}"
+    cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
 else
     # Conda-build eman
     source activate root
