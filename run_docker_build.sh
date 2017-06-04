@@ -21,7 +21,7 @@ docker_conda_root="${docker_home_dir}/miniconda2"
 dot_conda_dir="${output_volumes_dir}/dot_conda"
 conda_bld_dir="${output_volumes_dir}/conda-bld"
 pkgs_dir="${output_volumes_dir}/pkgs"
-installers_dir="${output_volumes_dir}/installers"
+installers_dir="${output_volumes_dir}"
 
 
 docker_dot_conda_dir="${docker_home_dir}/.conda/"
