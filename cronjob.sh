@@ -41,6 +41,8 @@ cd "${EMAN_REPO_DIR}"
 git checkout ${branch}
 git pull --rebase
 
+mkdir -p "${INSTALLERS_DIR}"
+
 if [ "$1" == "centos6" ];then
     bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
                                         "${EMAN_REPO_DIR}" \
