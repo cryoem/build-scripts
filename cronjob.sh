@@ -46,9 +46,6 @@ if [ "$1" == "centos6" ];then
                                         "${EMAN_REPO_DIR}" \
                                         "${INSTALLERS_DIR}"
 else
-    # Conda-build eman
-    source activate root
-
     bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
