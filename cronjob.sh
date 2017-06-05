@@ -1,7 +1,8 @@
 #!/bin/bash
 
 function print_usage(){
-    printf "\e\033[35m\n  Usage: $(basename ${0})%s\n\n\033[0m" "    {mac|centos6|centos7|win}    [branch-to-checkout]" >&2
+    spaces=$(printf " %.0s" {1..4})
+    printf "\e\033[35m\n  Usage: $(basename ${0})${spaces}%s${spaces}%s\n\n\033[0m" "{mac|centos6|centos7|win}" "[branch-to-checkout]" >&2
     exit 64
 }
 
