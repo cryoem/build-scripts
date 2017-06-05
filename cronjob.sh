@@ -2,7 +2,7 @@
 
 function print_usage(){
     echo
-    echo -e '\033[35m'"  Usage: $(basename ${0})    {mac|centos6|centos7|win}    [branch-to-checkout]"'\033[0m'
+    echo -e '\033[35m'"  Usage: $(basename ${0})    {mac|centos6|centos7|win}    [branch-to-checkout]"'\033[0m' >&2
     echo
     exit 64
 }
