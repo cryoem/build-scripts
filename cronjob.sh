@@ -1,9 +1,7 @@
 #!/bin/bash
 
 function print_usage(){
-    echo
-    echo -e '\033[35m'"  Usage: $(basename ${0})    {mac|centos6|centos7|win}    [branch-to-checkout]"'\033[0m' >&2
-    echo
+    printf "\e\033[35m\n  Usage: $(basename ${0})%s\n\n\033[0m" "    {mac|centos6|centos7|win}    [branch-to-checkout]" >&2
     exit 64
 }
 
