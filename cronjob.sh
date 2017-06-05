@@ -27,7 +27,7 @@ set -xe
 MYDIR=$(cd $(dirname $0) && pwd -P)
 EMAN_REPO_DIR="${HOME}"/workspace/eman2-src
 EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
-INSTALLERS_DIR="${HOME}"/workspace/eman-installers
+INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
@@ -41,14 +41,18 @@ cd "${EMAN_REPO_DIR}"
 git checkout ${branch}
 git pull --rebase
 
-# Conda-build eman
-source activate root
+mkdir -p "${INSTALLERS_DIR}"
 
-bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
-                                     "${INSTALLERS_DIR}" \
-                                     "${CONSTRUCT_YAML_DIR}"
+if [ "$1" == "centos6" ];then
+    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
+                                        "${EMAN_REPO_DIR}" \
+                                        "${INSTALLERS_DIR}"
+else
+    bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
+                                         "${INSTALLERS_DIR}" \
+                                         "${CONSTRUCT_YAML_DIR}"
+fi
 
-# Upload installer
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
 
 if [ "$1" != "win" ];then
