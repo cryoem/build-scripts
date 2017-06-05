@@ -21,7 +21,12 @@ docker_conda_root="${docker_home_dir}/miniconda2"
 dot_conda_dir="${output_volumes_dir}/dot_conda"
 conda_bld_dir="${output_volumes_dir}/conda-bld"
 pkgs_dir="${output_volumes_dir}/pkgs"
-installers_dir="${output_volumes_dir}/installers"
+installers_dir="${output_volumes_dir}"
+
+mkdir -p "${dot_conda_dir}"
+mkdir -p "${conda_bld_dir}"
+mkdir -p "${pkgs_dir}"
+mkdir -p "${installers_dir}"
 
 
 docker_dot_conda_dir="${docker_home_dir}/.conda/"
@@ -55,7 +60,5 @@ bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_eman_repo_dir}"/recipes/eman \
                                 "${docker_installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
-
-chown -v $HOST_GID:$HOST_UID "${installers_dir}"/*
 
 EOF
