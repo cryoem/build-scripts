@@ -56,6 +56,4 @@ bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
 
-chown -vR $HOST_GID:$HOST_UID "${docker_installers_dir}"
-
 EOF
