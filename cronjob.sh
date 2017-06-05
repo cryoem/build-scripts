@@ -7,18 +7,24 @@ function print_usage(){
     exit 64
 }
 
-if [ $# -lt 1 ] || [ $# -gt 2 ];then
-    print_usage
-fi
 
 version="2.2"
 
-case $1 in
-    'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
-    'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily.exe";  ;;
-    'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
-    'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; upload_ext="daily1.exe"; ;;
-    *)         print_usage; ;;
+case $# in
+    1|2)
+        case $1 in
+            'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
+            'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily.exe";  ;;
+            'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
+            'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; upload_ext="daily1.exe"; ;;
+            *)         print_usage; ;;
+        esac
+
+        branch=${2:-"master"}
+        ;;
+
+    *) print_usage
+       ;;
 esac
 
 if [ $# -eq 2 ];then
