@@ -31,5 +31,6 @@ RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_6
 RUN conda build eman2-2.2/recipes/eman/ -c cryoem -c defaults -c conda-forge --numpy 1.8
 RUN conda install libgfortran=1.0 && \
     conda install eman2 --use-local -c cryoem -c defaults -c conda-forge
+RUN conda build purge-all
 
 CMD [ "/bin/bash" ]
