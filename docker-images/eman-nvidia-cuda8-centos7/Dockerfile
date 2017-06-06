@@ -20,9 +20,8 @@ RUN bash miniconda.sh -b && \
     source /root/miniconda2/bin/activate root && \
     conda config --set show_channel_urls true && \
     conda install conda-build --yes && \
-    curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz
-RUN tar xzvf v2.2.tar.gz && \
-ls && \
+    curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz && \
+    tar xzvf v2.2.tar.gz && \
     conda build eman2-2.2/recipes/eman -c cryoem -c defaults -c conda-forge && \
     conda install eman2 --use-local && \
     conda build purge-all
