@@ -15,6 +15,7 @@ RUN yum install -y \
     yum clean all
 RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh
 RUN pwd && ls && ls /root && whoami
+RUN bash miniconda.sh -b
 
 ENV PATH /root/miniconda2/bin:$PATH
 ENV PYTHONUNBUFFERED 1
