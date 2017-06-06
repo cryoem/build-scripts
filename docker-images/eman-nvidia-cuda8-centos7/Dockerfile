@@ -8,9 +8,6 @@ COPY docker-images/eman-nvidia-cuda8-centos7/yum.sh /workspace/
 RUN bash /workspace/yum.sh
 RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh
 RUN pwd && ls && ls /root
-RUN bash miniconda.sh -bf -p /workspace/miniconda2
-RUN source /workspace/miniconda2/bin/activate root
-RUN conda config --set show_channel_urls true
 
 ENV PATH /root/miniconda2/bin:$PATH
 ENV PYTHONUNBUFFERED 1
