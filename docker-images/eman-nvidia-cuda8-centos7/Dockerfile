@@ -4,6 +4,7 @@ FROM nvidia/cuda:8.0-devel-centos7
 ENV LANG en_US.UTF-8
 
 RUN yum install -y \
+               devtoolset-4 \
                gcc \
                gcc-c++ \
                bzip2 \
