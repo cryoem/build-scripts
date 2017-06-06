@@ -3,7 +3,8 @@ FROM nvidia/cuda:8.0-devel-centos7
 # Set an encoding to make things work smoothly.
 ENV LANG en_US.UTF-8
 
-RUN yum install -y \
+RUN yum groupinstall "Development tools" -y && \
+    yum install -y \
                devtoolset-4 \
                gcc \
                gcc-c++ \
