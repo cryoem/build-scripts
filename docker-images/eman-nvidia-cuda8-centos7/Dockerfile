@@ -18,6 +18,9 @@ RUN yum groupinstall "Development tools" -y && \
                fontconfig && \
     yum clean all && \
     useradd -m eman
+USER eman
+WORKDIR /home/eman
+ENV PATH /home/eman/miniconda2/bin:$PATH
 RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh
 
 CMD [ "/bin/bash" ]
