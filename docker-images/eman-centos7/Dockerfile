@@ -18,5 +18,12 @@ RUN yum install -y \
 USER eman
 WORKDIR /home/eman
 ENV PATH /home/eman/miniconda2/bin:$PATH
+RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh && \
+    bash miniconda.sh -b && \
+    source activate root && \
+    conda config --set show_channel_urls true && \
+    conda install conda-build --yes && \
+    curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz && \
+    tar xzvf v2.2.tar.gz
 
 CMD [ "/bin/bash" ]
