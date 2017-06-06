@@ -6,6 +6,7 @@ ENV LANG en_US.UTF-8
 RUN yum install -y \
                gcc \
                gcc-c++ \
+               bzip2 \
                mesa-libGLU-devel \
                libXext-devel \
                libXrender-devel \
