@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-runtime-centos7
+FROM nvidia/cuda:8.0-devel-centos7
 
 # Set an encoding to make things work smoothly.
 ENV LANG en_US.UTF-8
