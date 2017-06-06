@@ -16,7 +16,8 @@ RUN yum groupinstall "Development tools" -y && \
                libSM-devel \
                libX11-devel \
                fontconfig && \
-    yum clean all
+    yum clean all && \
+    useradd -m eman
 RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh
 
 CMD [ "/bin/bash" ]
