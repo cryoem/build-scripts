@@ -5,8 +5,8 @@ ENV LANG en_US.UTF-8
 
 WORKDIR /workspace
 COPY docker-images/eman-nvidia-cuda8-centos7/yum.sh set_conda_environment.sh /workspace/
-RUN bash /workspace/yum.sh && \
-    curl -v -L -O https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && \
+RUN bash /workspace/yum.sh
+RUN curl -v -L -O https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && \
     bash Miniconda2-latest-Linux-x86_64.sh -b && \
     source ${HOME}/miniconda2/bin/activate root && \
     conda config --set show_channel_urls true && \
