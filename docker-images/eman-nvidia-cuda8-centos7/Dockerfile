@@ -16,15 +16,15 @@ RUN yum install -y \
     yum clean all
 RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh
 RUN pwd && ls && ls /root && whoami
-RUN bash miniconda.sh -b
-RUN source /root/miniconda2/bin/activate root
-RUN conda config --set show_channel_urls true
-RUN conda install conda-build --yes
-RUN curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz
-RUN tar xzvf eman2-2.2.tar.gz
-RUN conda build eman2-2.2/recipes/eman -c cryoem -c defaults -c conda-forge
-RUN conda install eman2 --use-local
-RUN conda build purge-all
+RUN bash miniconda.sh -b && \
+    source /root/miniconda2/bin/activate root && \
+    conda config --set show_channel_urls true && \
+    conda install conda-build --yes && \
+    curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz && \
+    tar xzvf eman2-2.2.tar.gz && \
+    conda build eman2-2.2/recipes/eman -c cryoem -c defaults -c conda-forge && \
+    conda install eman2 --use-local && \
+    conda build purge-all
 
 ENV PATH /root/miniconda2/bin:$PATH
 ENV PYTHONUNBUFFERED 1
