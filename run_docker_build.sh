@@ -47,6 +47,7 @@ docker run -i \
             -v "$pkgs_dir":"$docker_pkgs_dir" \
             -v "$eman_repo_dir":"$docker_eman_repo_dir" \
             -v "$installers_dir":"$docker_installers_dir" \
+            -v /etc/localtime:/etc/localtime \
             -a stdin -a stdout -a stderr \
             $docker_image \
             bash << EOF
