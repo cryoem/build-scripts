@@ -3,9 +3,16 @@ FROM nvidia/cuda:8.0-devel-centos7
 # Set an encoding to make things work smoothly.
 ENV LANG en_US.UTF-8
 
-WORKDIR /workspace
-COPY docker-images/eman-nvidia-cuda8-centos7/yum.sh /workspace/
-RUN bash /workspace/yum.sh
+RUN yum install -y \
+               gcc \
+               gcc-c++ \
+               mesa-libGLU-devel \
+               libXext-devel \
+               libXrender-devel \
+               libSM-devel \
+               libX11-devel \
+               fontconfig && \
+    yum clean all
 RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh
 RUN pwd && ls && ls /root && whoami
 
