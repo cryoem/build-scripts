@@ -8,9 +8,8 @@ COPY docker-images/eman-nvidia-cuda8-centos7/yum.sh set_conda_environment.sh /wo
 RUN bash /workspace/yum.sh
 RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -o miniconda.sh
 RUN pwd && ls
-RUN bash miniconda.sh -h
-RUN bash miniconda.sh -b
-RUN source ${HOME}/miniconda2/bin/activate root
+RUN bash miniconda.sh -bf
+RUN source /root/miniconda2/bin/activate root
 RUN conda config --set show_channel_urls true
 RUN conda install conda-build --yes
 RUN curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz
