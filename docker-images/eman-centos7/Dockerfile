@@ -28,5 +28,6 @@ RUN curl -v -L https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_6
     curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz && \
     tar xzvf v2.2.tar.gz
 RUN conda build eman2-2.2/recipes/eman/ -c cryoem -c defaults -c conda-forge --numpy 1.8
+RUN conda install eman2 --use-local -c cryoem -c defaults -c conda-forge
 
 CMD [ "/bin/bash" ]
