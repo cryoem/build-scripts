@@ -19,7 +19,9 @@ RUN pwd && ls && ls /root && whoami
 RUN bash miniconda.sh -b && \
     source /root/miniconda2/bin/activate root && \
     conda config --set show_channel_urls true && \
-    conda install conda-build --yes
+    conda install conda-build --yes && \
+    curl -v -L -O https://github.com/cryoem/eman2/archive/v2.2.tar.gz
+RUN ls
 
 ENV PATH /root/miniconda2/bin:$PATH
 ENV PYTHONUNBUFFERED 1
