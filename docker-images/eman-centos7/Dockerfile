@@ -4,7 +4,8 @@ FROM centos:7
 ENV LANG en_US.UTF-8
 ENV PYTHONUNBUFFERED 1
 
-RUN yum install -y \
+RUN yum groupinstall "Development tools" -y && \
+    yum install -y \
                gcc \
                gcc-c++ \
                bzip2 \
