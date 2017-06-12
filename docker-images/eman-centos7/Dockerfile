@@ -14,9 +14,14 @@ RUN yum groupinstall "Development tools" -y && \
                libXrender-devel \
                libSM-devel \
                libX11-devel \
-               fontconfig && \
+               fontconfig \
+               xorg-x11-fonts-Type1 \
+               sudo && \
     yum clean all && \
-    useradd -m eman
+    fc-cache -f -v
+RUN useradd -m eman -G wheel && \
+    echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    echo 'Defaults:%wheel !requiretty' >> /etc/sudoers
 USER eman
 WORKDIR /home/eman
 ENV PATH /home/eman/miniconda2/bin:$PATH
