@@ -38,7 +38,6 @@ UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${upload_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
-{
 # Checkout code
 cd "${EMAN_REPO_DIR}"
 git fetch --prune
@@ -75,5 +74,3 @@ if [ ${SKIP_UPLOAD:-1} -ne 1 ];then
     
     $cmd "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
 fi
-
-} 2>&1 | tee "${HOME}"/workspace/logs/build_${timestamp}.log
