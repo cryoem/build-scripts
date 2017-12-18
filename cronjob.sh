@@ -25,12 +25,6 @@ case $# in
        ;;
 esac
 
-if [ $# -eq 2 ];then
-    branch=$2
-else
-    branch="master"
-fi
-
 set -xe
 
 MYDIR=$(cd $(dirname $0) && pwd -P)
