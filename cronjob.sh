@@ -58,6 +58,10 @@ fi
 
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
 
+if [ "$branch" == "master" ] && [ -z ${SKIP_UPLOAD} ];then
+    SKIP_UPLOAD=0
+fi
+
 if [ ${SKIP_UPLOAD:-1} -ne 1 ];then
     if [ "$1" != "win" ];then
         cmd="rsync -avzh --stats"
