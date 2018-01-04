@@ -35,6 +35,7 @@ CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
 UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${upload_ext}"
+JENKINS_ARCHIVE_FILENAME="eman${version}.${1}.${ctor_out_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
@@ -56,6 +57,7 @@ else
 fi
 
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
+cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${JENKINS_ARCHIVE_FILENAME}"
 
 if [ "$branch" == "master" ] && [ -z ${SKIP_UPLOAD} ];then
     SKIP_UPLOAD=0
