@@ -46,15 +46,15 @@ git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
 
-if [ "$1" == "centos6" ];then
-    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
-                                        "${EMAN_REPO_DIR}" \
-                                        "${INSTALLERS_DIR}"
-else
-    bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
-                                         "${INSTALLERS_DIR}" \
-                                         "${CONSTRUCT_YAML_DIR}"
-fi
+#if [ "$1" == "centos6" ];then
+#    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
+#                                        "${EMAN_REPO_DIR}" \
+#                                        "${INSTALLERS_DIR}"
+#else
+#    bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
+#                                         "${INSTALLERS_DIR}" \
+#                                         "${CONSTRUCT_YAML_DIR}"
+#fi
 
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${JENKINS_ARCHIVE_FILENAME}"
