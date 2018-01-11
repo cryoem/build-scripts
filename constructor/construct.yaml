@@ -1,9 +1,9 @@
 name: EMAN2
-version: 2.2
+version: 2.21
 
-installer_filename: eman2.2.mac.sh      # [osx]
-installer_filename: eman2.2.linux64.sh  # [linux]
-installer_filename: eman2.2.win64.exe   # [win]
+installer_filename: eman2.mac.sh      # [osx]
+installer_filename: eman2.linux64.sh  # [linux]
+installer_filename: eman2.win64.exe   # [win]
 
 channels:
     - http://repo.continuum.io/pkgs/free/
@@ -15,8 +15,8 @@ channels:
 keep_pkgs: True
 
 specs:
-  - eman2 2.2             # [not linux]
-  - eman2 2.2 np18py27_0  # [linux]
+  - eman2 2.21             # [not linux]
+  - eman2 2.21 np18py27_0  # [linux]
   - libgfortran 1.0       # [linux]
   - hdf5 1.8.17
   - conda
