@@ -20,6 +20,8 @@ fi
 
 # Build eman recipe
 conda build ${EMAN_RECIPE_DIR} -c cryoem -c defaults -c conda-forge ${CONDA_BUILD_NUMPY_OPT}
+conda info -a
+conda render ${EMAN_RECIPE_DIR}
 
 # Package eman
 mkdir -p ${OUTPUT_DIR} && cd ${OUTPUT_DIR}
