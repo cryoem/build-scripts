@@ -47,7 +47,7 @@ git pull --rebase
 mkdir -p "${INSTALLERS_DIR}"
 
 if [ "$1" == "centos6" ];then
-    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
+    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6:working \
                                         "${EMAN_REPO_DIR}" \
                                         "${INSTALLERS_DIR}"
 else
