@@ -15,6 +15,8 @@ export PYTHONUNBUFFERED=1
 source activate root
 
 # Build eman recipe
+conda info -a
+conda render ${EMAN_RECIPE_DIR}
 conda build ${EMAN_RECIPE_DIR} -c cryoem -c defaults -c conda-forge
 
 # Package eman
