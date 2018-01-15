@@ -55,6 +55,13 @@ docker run -i \
 
 set -ex
 
+# Install constructor that is customized for eman
+curl -v -L https://github.com/cryoem/constructor/archive/eman.tar.gz -o constructor-eman.tar.gz
+tar xzvf constructor-eman.tar.gz
+
+cd constructor-eman/
+python setup.py install
+
 bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_eman_repo_dir}"/recipes/eman \
                                 "${docker_installers_dir}" \
