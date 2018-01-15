@@ -7,6 +7,7 @@ installer_filename: eman2.win64.exe   # [win]
 
 channels:
     - http://repo.continuum.io/pkgs/free/
+    - http://conda.anaconda.org/anaconda
     - https://conda.anaconda.org/conda-forge/
     - https://conda.anaconda.org/cryoem
     - http://repo.continuum.io/pkgs/msys2          # [win]
