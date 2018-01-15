@@ -55,6 +55,9 @@ else
     bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
+
+    rm -rf eman2-linux64/ eman2-mac/
+    bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
 fi
 
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
