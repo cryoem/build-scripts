@@ -65,6 +65,7 @@ conda install constructor --yes
 python setup.py install
 conda update ruamel_yaml --no-deps --yes
 constructor --version
+conda install conda-build=2 --no-deps --yes
 
 bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_eman_repo_dir}"/recipes/eman \
