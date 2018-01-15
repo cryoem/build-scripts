@@ -59,7 +59,11 @@ curl -v -L https://github.com/cryoem/constructor/archive/eman.tar.gz -o construc
 tar xzvf constructor-eman.tar.gz
 
 cd constructor-eman/
+conda remove constructor --yes
+conda install constructor --yes
 python setup.py install
+conda update ruamel_yaml --no-deps --yes
+constructor --version
 
 bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_eman_repo_dir}"/recipes/eman \
