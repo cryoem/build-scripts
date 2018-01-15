@@ -14,6 +14,7 @@ channels:
     - file:///place_holder_conda_prefix/conda-bld
 
 keep_pkgs: True
+ignore_duplicate_files: True
 
 specs:
   - eman2 2.2             # [not linux]
