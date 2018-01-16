@@ -41,7 +41,7 @@ timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 {
 # Checkout code
 cd "${EMAN_REPO_DIR}"
-git checkout ${branch}
+git checkout ${branch} || git checkout -t origin/${branch}
 git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
