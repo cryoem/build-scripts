@@ -7,15 +7,18 @@ installer_filename: eman2.win64.exe   # [win]
 
 channels:
     - http://repo.continuum.io/pkgs/free/
+    - http://conda.anaconda.org/anaconda
     - https://conda.anaconda.org/conda-forge/
     - https://conda.anaconda.org/cryoem
     - http://repo.continuum.io/pkgs/msys2          # [win]
     - file:///place_holder_conda_prefix/conda-bld
 
 keep_pkgs: True
+ignore_duplicate_files: True
 
 specs:
   - eman2 2.21
+  - libgfortran 1.0       # [linux]
   - conda
   - conda-build
   - pip
