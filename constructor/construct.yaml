@@ -6,10 +6,10 @@ installer_filename: eman2.2.linux64.sh  # [linux]
 installer_filename: eman2.2.win64.exe   # [win]
 
 channels:
+    - https://conda.anaconda.org/cryoem
     - http://repo.continuum.io/pkgs/free/
     - http://conda.anaconda.org/anaconda
     - https://conda.anaconda.org/conda-forge/
-    - https://conda.anaconda.org/cryoem
     - http://repo.continuum.io/pkgs/msys2          # [win]
     - file:///place_holder_conda_prefix/conda-bld
 
