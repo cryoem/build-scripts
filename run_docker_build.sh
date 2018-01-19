@@ -63,7 +63,7 @@ cd constructor-eman/
 conda remove constructor --yes
 conda install constructor --yes
 python setup.py install
-conda update ruamel_yaml --no-deps --yes
+conda install "ruamel_yaml=0.11.14=py27h672d447_2" --no-deps --yes
 constructor --version
 conda install conda-build=2 --no-deps --yes
 
