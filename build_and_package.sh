@@ -25,10 +25,8 @@ mkdir -p ${OUTPUT_DIR} && cd ${OUTPUT_DIR}
 
 CONSTRUCT_YAML="${CONSTRUCT_YAML_DIR}/construct.yaml"
 CONDA_PREFIX_NEW=$(echo ${CONDA_PREFIX} | sed "s~^/\(.\)/~\1:/~")
-
-rm -rfv ~/.conda/constructor/*
-
 sed -i.bak "s~\(^.*file://\)\(.*$\)~\1${CONDA_PREFIX_NEW}/conda-bld/~" ${CONSTRUCT_YAML}
 cat ${CONSTRUCT_YAML}
+constructor --clean -v
 constructor ${CONSTRUCT_YAML_DIR}
 mv ${CONSTRUCT_YAML}.bak ${CONSTRUCT_YAML}
