@@ -17,11 +17,12 @@ keep_pkgs: True
 ignore_duplicate_files: True
 
 specs:
-  - eman2 2.21
-  - libgfortran 1.0       # [linux]
+  - eman2
   - conda
   - conda-build
   - pip
+  - console_shortcut  # [win]
+  - menuinst          # [win]
 
 welcome_image: images/EMAN2Icon.png    # [win]
 icon_image:    images/eman.ico         # [win]
