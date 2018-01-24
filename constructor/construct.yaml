@@ -22,6 +22,8 @@ specs:
   - conda
   - conda-build
   - pip
+  - console_shortcut  # [win]
+  - menuinst          # [win]
 
 welcome_image: images/EMAN2Icon.png    # [win]
 icon_image:    images/eman.ico         # [win]
