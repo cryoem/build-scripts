@@ -31,7 +31,7 @@ MYDIR=$(cd $(dirname $0) && pwd -P)
 EMAN_REPO_DIR="${HOME}"/workspace/eman2-cron
 EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
-CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
+CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts-cron/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
 UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${upload_ext}"
