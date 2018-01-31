@@ -6,15 +6,15 @@ function print_usage(){
 }
 
 
-version="2.2"
+version="2"
 
 case $# in
     1|2)
         case $1 in
-            'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
-            'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily.exe";  ;;
-            'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
-            'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; upload_ext="daily1.exe"; ;;
+            'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="unstable.sh";  ;;
+            'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="unstable.sh";  ;;
+            'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  upload_ext="unstable.sh";  ;;
+            'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; upload_ext="unstable.exe"; ;;
             *)         print_usage; ;;
         esac
 
@@ -24,12 +24,6 @@ case $# in
     *) print_usage
        ;;
 esac
-
-if [ $# -eq 2 ];then
-    branch=$2
-else
-    branch="master"
-fi
 
 set -xe
 
@@ -41,35 +35,46 @@ CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
 UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${upload_ext}"
+JENKINS_ARCHIVE_FILENAME="eman${version}.${1}.${ctor_out_ext}"
+CONTINUOUS_BUILD_FILENAME="eman2.${1}.unstable.${ctor_out_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
-{
 # Checkout code
 cd "${EMAN_REPO_DIR}"
-git checkout ${branch}
+git fetch --prune
+git checkout ${branch} || git checkout -t origin/${branch}
 git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
 
 if [ "$1" == "centos6" ];then
-    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6 \
+    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6:working \
                                         "${EMAN_REPO_DIR}" \
                                         "${INSTALLERS_DIR}"
 else
     bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
+
+    rm -rf eman2-linux64/ eman2-mac/
+    bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
 fi
 
-cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}"
+cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" || true
+cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${JENKINS_ARCHIVE_FILENAME}" || true
+cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${CONTINUOUS_BUILD_FILENAME}"
 
-if [ "$1" != "win" ];then
-    cmd="rsync -avzh --stats"
-else
-    cmd="scp -v"
+if [ "$branch" == "master" ] && [ -z ${SKIP_UPLOAD} ];then
+    SKIP_UPLOAD=0
 fi
 
-$cmd "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
-
-} 2>&1 | tee "${HOME}"/workspace/logs/build_${timestamp}.log
+if [ ${SKIP_UPLOAD:-1} -ne 1 ];then
+    if [ "$1" != "win" ];then
+        cmd="rsync -avzh --stats"
+    else
+        cmd="scp -v"
+    fi
+    
+    $cmd "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
+fi
