@@ -56,7 +56,7 @@ else
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
 
-    cmd "/C ${EMAN_REPO_DIR//\//\\}\\tests\\test_binary_installation.bat"
+    cmd "/C ${WORKSPACE//\//\\}\\tests\\test_binary_installation.bat"
 fi
 
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" || true
