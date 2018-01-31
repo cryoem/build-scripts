@@ -44,7 +44,6 @@ timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 cd "${EMAN_REPO_DIR}"
 git fetch --prune
 git checkout ${branch} || git checkout -t origin/${branch}
-git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
 
