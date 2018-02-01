@@ -6,8 +6,6 @@ function print_usage(){
 }
 
 
-version="2.2"
-
 case $# in
     1|2)
         case $1 in
@@ -33,8 +31,8 @@ EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
-CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
-UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${ctor_out_ext}"
+CONSTRUCTOR_OUTPUT_FILENAME="eman2.${os_label}.${ctor_out_ext}"
+UPLOAD_FILENAME="eman2.${os_label}${distro_label}.${ctor_out_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
