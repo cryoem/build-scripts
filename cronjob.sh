@@ -9,13 +9,14 @@ function print_usage(){
 case $# in
     1|2)
         case $1 in
-            'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  ;;
-            'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  ;;
-            'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  ;;
-            'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; ;;
+            'centos6') os_label="linux"; ctor_out_ext="sh";  ;;
+            'centos7') os_label="linux"; ctor_out_ext="sh";  ;;
+            'mac')     os_label="mac";   ctor_out_ext="sh";  ;;
+            'win')     os_label="win";   ctor_out_ext="exe"; ;;
             *)         print_usage; ;;
         esac
 
+        distro_label=${1}
         branch=${2:-"master"}
         ;;
 
@@ -32,7 +33,7 @@ INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman2.${os_label}.${ctor_out_ext}"
-UPLOAD_FILENAME="eman2.${os_label}${distro_label}.${ctor_out_ext}"
+UPLOAD_FILENAME="eman2.${distro_label}.${ctor_out_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
