@@ -11,10 +11,10 @@ version="2.2"
 case $# in
     1|2)
         case $1 in
-            'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
-            'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="daily.exe";  ;;
-            'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  upload_ext="daily1.sh";  ;;
-            'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; upload_ext="daily1.exe"; ;;
+            'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  ;;
+            'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  ;;
+            'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  ;;
+            'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; ;;
             *)         print_usage; ;;
         esac
 
@@ -34,7 +34,7 @@ INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
-UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${upload_ext}"
+UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${ctor_out_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
