@@ -29,7 +29,7 @@ set -xe
 
 MYDIR=$(cd $(dirname $0) && pwd -P)
 EMAN_REPO_DIR="${HOME_DIR}"/workspace/eman2-cron
-EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
+EMAN_REICPE_DIR=${WORKSPACE}/recipes/eman
 INSTALLERS_DIR="${HOME_DIR}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME_DIR}"/workspace/build-scripts-cron/constructor
 
@@ -53,6 +53,7 @@ if [ "$1" == "centos6" ];then
                                         "${INSTALLERS_DIR}"
 else
     cat ${WORKSPACE}/tests/test_binary_installation.bat
+    cat ${EMAN_REICPE_DIR}/meta.yaml
     bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
