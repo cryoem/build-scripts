@@ -52,6 +52,7 @@ if [ "$1" == "centos6" ];then
                                         "${EMAN_REPO_DIR}" \
                                         "${INSTALLERS_DIR}"
 else
+    cat ${WORKSPACE}/tests/test_binary_installation.bat
     cmd "/C ${WORKSPACE//\//\\}\\tests\\test_binary_installation.bat"
 fi
 
