@@ -53,6 +53,10 @@ if [ "$1" == "centos6" ];then
                                         "${INSTALLERS_DIR}"
 else
     cat ${WORKSPACE}/tests/test_binary_installation.bat
+    bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
+                                         "${INSTALLERS_DIR}" \
+                                         "${CONSTRUCT_YAML_DIR}"
+
     cmd "/C ${WORKSPACE//\//\\}\\tests\\test_binary_installation.bat"
 fi
 
