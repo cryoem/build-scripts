@@ -26,8 +26,11 @@ esac
 
 set -xe
 
+MYDIR=$(cd $(dirname $0) && pwd -P)
 EMAN_REPO_DIR="${HOME_DIR}"/workspace/eman2-cron
+EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME_DIR}/workspace/${1}-installers"
+CONSTRUCT_YAML_DIR="${HOME_DIR}"/workspace/build-scripts-cron/constructor
 
 # Checkout code
 cd "${EMAN_REPO_DIR}"
@@ -36,3 +39,13 @@ git checkout ${branch} || git checkout -t origin/${branch}
 git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
+
+if [ "$1" == "centos6" ];then
+    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6:working \
+                                        "${EMAN_REPO_DIR}" \
+                                        "${INSTALLERS_DIR}"
+else
+    bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
+                                         "${INSTALLERS_DIR}" \
+                                         "${CONSTRUCT_YAML_DIR}"
+fi
