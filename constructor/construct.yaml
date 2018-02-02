@@ -1,9 +1,9 @@
 name: EMAN2
 version: 2.21
 
-installer_filename: eman2.mac.sh      # [osx]
-installer_filename: eman2.linux64.sh  # [linux]
-installer_filename: eman2.win64.exe   # [win]
+installer_filename: eman2.mac.sh    # [osx]
+installer_filename: eman2.linux.sh  # [linux]
+installer_filename: eman2.win.exe   # [win]
 
 channels:
     - https://conda.anaconda.org/cryoem

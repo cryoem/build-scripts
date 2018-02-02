@@ -6,18 +6,17 @@ function print_usage(){
 }
 
 
-version="2"
-
 case $# in
     1|2)
         case $1 in
-            'centos6') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="unstable.sh";  ;;
-            'centos7') os_label="linux64"; distro_label=".${1}"; ctor_out_ext="sh";  upload_ext="unstable.sh";  ;;
-            'mac')     os_label="mac";     distro_label="";      ctor_out_ext="sh";  upload_ext="unstable.sh";  ;;
-            'win')     os_label="win64";   distro_label="";      ctor_out_ext="exe"; upload_ext="unstable.exe"; ;;
+            'centos6') os_label="linux"; ctor_out_ext="sh";  ;;
+            'centos7') os_label="linux"; ctor_out_ext="sh";  ;;
+            'mac')     os_label="mac";   ctor_out_ext="sh";  ;;
+            'win')     os_label="win";   ctor_out_ext="exe"; ;;
             *)         print_usage; ;;
         esac
 
+        distro_label=${1}
         branch=${2:-"master"}
         ;;
 
@@ -33,8 +32,8 @@ EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
-CONSTRUCTOR_OUTPUT_FILENAME="eman${version}.${os_label}.${ctor_out_ext}"
-UPLOAD_FILENAME="eman${version}.${os_label}${distro_label}.${upload_ext}"
+CONSTRUCTOR_OUTPUT_FILENAME="eman2.${os_label}.${ctor_out_ext}"
+UPLOAD_FILENAME="eman2.${distro_label}.${ctor_out_ext}"
 JENKINS_ARCHIVE_FILENAME="eman${version}.${1}.${ctor_out_ext}"
 CONTINUOUS_BUILD_FILENAME="eman2.${1}.unstable.${ctor_out_ext}"
 
@@ -57,7 +56,7 @@ else
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
 
-    rm -rf eman2-linux64/ eman2-mac/
+    rm -rf eman2-linux/ eman2-mac/
     bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
 fi
 
