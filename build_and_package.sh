@@ -19,3 +19,14 @@ conda info -a
 conda render ${EMAN_RECIPE_DIR}
 conda build purge-all
 conda build ${EMAN_RECIPE_DIR} -c cryoem -c defaults -c conda-forge
+
+# Package eman
+mkdir -p ${OUTPUT_DIR} && cd ${OUTPUT_DIR}
+
+CONSTRUCT_YAML="${CONSTRUCT_YAML_DIR}/construct.yaml"
+CONDA_PREFIX_NEW=$(echo ${CONDA_PREFIX} | sed "s~^/\(.\)/~\1:/~")
+sed -i.bak "s~\(^.*file:///\)\(.*$\)~\1${CONDA_PREFIX_NEW}/conda-bld/~" ${CONSTRUCT_YAML}
+cat ${CONSTRUCT_YAML}
+constructor --clean -v --cache-dir=${HOME_DIR}/.conda/constructor
+constructor ${CONSTRUCT_YAML_DIR} -v --cache-dir=${HOME_DIR}/.conda/constructor
+mv ${CONSTRUCT_YAML}.bak ${CONSTRUCT_YAML}
