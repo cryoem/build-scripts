@@ -54,7 +54,11 @@ else
                                          "${CONSTRUCT_YAML_DIR}"
 
     rm -rf eman2-linux/ eman2-mac/
-    bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
+    if [ "$1" != "win" ];then
+        bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
+    else
+        cmd "/C ${EMAN_REPO_DIR//\//\\}\\tests\\test_binary_installation.bat"
+    fi
 fi
 
 git checkout -f master
