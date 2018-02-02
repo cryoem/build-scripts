@@ -72,7 +72,6 @@ bash "${docker_build_scripts_dir}"/build_and_package.sh \
                                 "${docker_installers_dir}" \
                                 "${docker_build_scripts_dir}"/constructor
 
-rm -rf eman2-linux/
 bash "${docker_eman_repo_dir}"/tests/test_binary_installation.sh "${docker_installers_dir}"/"eman2.linux.sh"
 
 EOF
