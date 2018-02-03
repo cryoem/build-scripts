@@ -49,3 +49,6 @@ else
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
 fi
+
+git checkout -f master
+git branch -D ${branch}
