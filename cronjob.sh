@@ -42,7 +42,7 @@ timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 # Checkout code
 cd "${EMAN_REPO_DIR}"
 git fetch --prune
-git checkout ${branch} || git checkout -t origin/${branch}
+git checkout -f ${branch} || git checkout -t origin/${branch}
 git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
@@ -77,3 +77,6 @@ if [ ${SKIP_UPLOAD:-1} -ne 1 ];then
     
     $cmd "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
 fi
+
+git checkout -f master
+git branch -D ${branch}
