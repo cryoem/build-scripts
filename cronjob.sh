@@ -64,20 +64,6 @@ cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${U
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${JENKINS_ARCHIVE_FILENAME}" || true
 cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${CONTINUOUS_BUILD_FILENAME}"
 
-if [ "$branch" == "master" ] && [ -z ${SKIP_UPLOAD} ];then
-    SKIP_UPLOAD=0
-fi
-
-if [ ${SKIP_UPLOAD:-1} -ne 1 ];then
-    if [ "$1" != "win" ];then
-        cmd="rsync -avzh --stats"
-    else
-        cmd="scp -v"
-    fi
-    
-    $cmd "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
-fi
-
 git checkout -f master
 if [ "${branch}" != "master" ];then
     git branch -D ${branch}
