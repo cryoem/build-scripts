@@ -79,4 +79,6 @@ if [ ${SKIP_UPLOAD:-1} -ne 1 ];then
 fi
 
 git checkout -f master
-git branch -D ${branch}
+if [ "${branch}" != "master" ];then
+    git branch -D ${branch}
+fi
