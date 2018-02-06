@@ -26,41 +26,13 @@ esac
 
 set -xe
 
-MYDIR=$(cd $(dirname $0) && pwd -P)
 EMAN_REPO_DIR="${HOME_DIR}"/workspace/eman2-cron
-EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME_DIR}/workspace/${1}-installers"
-CONSTRUCT_YAML_DIR="${HOME_DIR}"/workspace/build-scripts-cron/constructor
-
-CONSTRUCTOR_OUTPUT_FILENAME="eman2.${os_label}.${ctor_out_ext}"
-
-timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
 # Checkout code
 cd "${EMAN_REPO_DIR}"
 git fetch --prune
-git checkout -f ${branch} || git checkout -t origin/${branch}
+git checkout ${branch} || git checkout -t origin/${branch}
 git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
-
-if [ "$1" == "centos6" ];then
-    bash "${MYDIR}/run_docker_build.sh" cryoem/centos6:working \
-                                        "${EMAN_REPO_DIR}" \
-                                        "${INSTALLERS_DIR}"
-else
-    bash "${MYDIR}/build_and_package.sh" "${EMAN_REICPE_DIR}" \
-                                         "${INSTALLERS_DIR}" \
-                                         "${CONSTRUCT_YAML_DIR}"
-
-    if [ "$1" != "win" ];then
-        bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
-    else
-        cmd "/C ${EMAN_REPO_DIR//\//\\}\\tests\\test_binary_installation.bat"
-    fi
-fi
-
-git checkout -f master
-if [ "${branch}" != "master" ];then
-    git branch -D ${branch}
-fi
