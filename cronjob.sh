@@ -33,9 +33,6 @@ INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
 CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman2.${os_label}.${ctor_out_ext}"
-UPLOAD_FILENAME="eman2.${distro_label}.${ctor_out_ext}"
-JENKINS_ARCHIVE_FILENAME="eman${version}.${1}.${ctor_out_ext}"
-CONTINUOUS_BUILD_FILENAME="eman2.${1}.unstable.${ctor_out_ext}"
 
 timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
@@ -58,24 +55,6 @@ else
 
     rm -rf eman2-linux/ eman2-mac/
     bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
-fi
-
-cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" || true
-cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${JENKINS_ARCHIVE_FILENAME}" || true
-cp -av "${INSTALLERS_DIR}/${CONSTRUCTOR_OUTPUT_FILENAME}" "${INSTALLERS_DIR}/${CONTINUOUS_BUILD_FILENAME}"
-
-if [ "$branch" == "master" ] && [ -z ${SKIP_UPLOAD} ];then
-    SKIP_UPLOAD=0
-fi
-
-if [ ${SKIP_UPLOAD:-1} -ne 1 ];then
-    if [ "$1" != "win" ];then
-        cmd="rsync -avzh --stats"
-    else
-        cmd="scp -v"
-    fi
-    
-    $cmd "${INSTALLERS_DIR}/${UPLOAD_FILENAME}" zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_86/
 fi
 
 git checkout -f master
