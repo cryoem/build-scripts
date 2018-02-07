@@ -27,19 +27,17 @@ esac
 set -xe
 
 MYDIR=$(cd $(dirname $0) && pwd -P)
-EMAN_REPO_DIR="${HOME}"/workspace/eman2-cron
+EMAN_REPO_DIR="${HOME_DIR}"/workspace/eman2-cron
 EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
-INSTALLERS_DIR="${HOME}/workspace/${1}-installers"
-CONSTRUCT_YAML_DIR="${HOME}"/workspace/build-scripts/constructor
+INSTALLERS_DIR="${HOME_DIR}/workspace/${1}-installers"
+CONSTRUCT_YAML_DIR="${HOME_DIR}"/workspace/build-scripts-cron/constructor
 
 CONSTRUCTOR_OUTPUT_FILENAME="eman2.${os_label}.${ctor_out_ext}"
-
-timestamp=$(date "+%y-%m-%d_%H-%M-%S")
 
 # Checkout code
 cd "${EMAN_REPO_DIR}"
 git fetch --prune
-git checkout -f ${branch} || git checkout -t origin/${branch}
+git checkout ${branch} || git checkout -t origin/${branch}
 git pull --rebase
 
 mkdir -p "${INSTALLERS_DIR}"
@@ -53,11 +51,12 @@ else
                                          "${INSTALLERS_DIR}" \
                                          "${CONSTRUCT_YAML_DIR}"
 
-    rm -rf eman2-linux/ eman2-mac/
-    bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}"/"${CONSTRUCTOR_OUTPUT_FILENAME}"
+    if [ "$1" != "win" ];then
+        bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}" "${CONSTRUCTOR_OUTPUT_FILENAME}"
+    else
+        cmd "/C ${EMAN_REPO_DIR//\//\\}\\tests\\test_binary_installation.bat ${INSTALLERS_DIR//\//\\} ${CONSTRUCTOR_OUTPUT_FILENAME} "
+    fi
 fi
 
 git checkout -f master
-if [ "${branch}" != "master" ];then
-    git branch -D ${branch}
-fi
+git branch -D ${branch}
