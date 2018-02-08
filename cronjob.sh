@@ -59,4 +59,6 @@ else
 fi
 
 git checkout -f master
-git branch -D ${branch}
+if [ "${branch}" != "master" ];then
+    git branch -D ${branch}
+fi
