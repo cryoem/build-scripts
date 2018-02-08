@@ -6,12 +6,12 @@ installer_filename: eman2.linux.sh  # [linux]
 installer_filename: eman2.win.exe   # [win]
 
 channels:
-    - https://conda.anaconda.org/cryoem/
-    - http://repo.continuum.io/pkgs/main/
-    - http://conda.anaconda.org/anaconda/
+    - https://conda.anaconda.org/cryoem
+    - http://repo.continuum.io/pkgs/free/
+    - http://conda.anaconda.org/anaconda
     - https://conda.anaconda.org/conda-forge/
-    - http://repo.continuum.io/pkgs/msys2/         # [win]
-    - file:///place_holder_conda_prefix/conda-bld/
+    - http://repo.continuum.io/pkgs/msys2          # [win]
+    - file:///place_holder_conda_prefix/conda-bld
 
 keep_pkgs: True
 ignore_duplicate_files: True
