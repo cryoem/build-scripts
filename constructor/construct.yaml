@@ -11,7 +11,7 @@ channels:
     - http://conda.anaconda.org/anaconda/
     - https://conda.anaconda.org/conda-forge/
     - http://repo.continuum.io/pkgs/msys2/         # [win]
-    - file:///place_holder_conda_prefix/conda-bld/
+    - file:///c:\Users\EMAN\Miniconda2\conda-bld
 
 keep_pkgs: True
 ignore_duplicate_files: True

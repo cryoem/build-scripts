@@ -27,6 +27,7 @@ esac
 set -xe
 
 MYDIR=$(cd $(dirname $0) && pwd -P)
+HOME_DIR='/c/Users/EMAN'
 EMAN_REPO_DIR="${HOME_DIR}"/workspace/eman2-cron
 EMAN_REICPE_DIR="${EMAN_REPO_DIR}"/recipes/eman
 INSTALLERS_DIR="${HOME_DIR}/workspace/${1}-installers"
@@ -37,8 +38,7 @@ CONSTRUCTOR_OUTPUT_FILENAME="eman2.${os_label}.${ctor_out_ext}"
 # Checkout code
 cd "${EMAN_REPO_DIR}"
 git fetch --prune
-git checkout ${branch} || git checkout -t origin/${branch}
-git pull --rebase
+git checkout v2.21a || git checkout origin/v2.21a
 
 mkdir -p "${INSTALLERS_DIR}"
 
@@ -54,9 +54,8 @@ else
     if [ "$1" != "win" ];then
         bash "${EMAN_REPO_DIR}"/tests/test_binary_installation.sh "${INSTALLERS_DIR}" "${CONSTRUCTOR_OUTPUT_FILENAME}"
     else
-        cmd "/C ${EMAN_REPO_DIR//\//\\}\\tests\\test_binary_installation.bat ${INSTALLERS_DIR//\//\\} ${CONSTRUCTOR_OUTPUT_FILENAME} "
+        cmd "/C ${WORKSPACE//\//\\}\\tests\\test_binary_installation.bat c:\\Users\\EMAN\\workspace\\win-installers eman2.win.exe "
     fi
 fi
 
 git checkout -f master
-git branch -D ${branch}
